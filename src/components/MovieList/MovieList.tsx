@@ -43,5 +43,3 @@ const MovieList = ({ movies, origin = "Unknown" }: MovieListProps) => {
 };
 
 export default MovieList;
-
-

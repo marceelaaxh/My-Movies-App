@@ -3,10 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { getTopRated } from "@/services/movies/getTopRated";
 import MovieList from "@/components/MovieList/MovieList";
+import { useRouter } from "next/navigation";
+import SectionNavigation from "@/components/SectionNavigation/SectionNavigation";
 
 const TopRatedPage = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState<any[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchTopRatedMovies = async () => {
@@ -30,6 +33,12 @@ const TopRatedPage = () => {
       
       {loading && <h5 className="text-lg text-gray-500">Cargando...</h5>}
       {!loading && <MovieList movies={movies} origin="Top-rated" />}
+      <SectionNavigation
+        page={3}
+        totalPages={4}
+        prev="/now-playing"
+        next="/my-favorites"
+      />
     </div>
   );
 };

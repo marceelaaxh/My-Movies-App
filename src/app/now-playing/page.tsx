@@ -1,10 +1,13 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { getNowPlaying } from "@/services/movies/getNowPlaying";
 import MovieList from "@/components/MovieList/MovieList";
+import SectionNavigation from "@/components/SectionNavigation/SectionNavigation";
 
 const NowPlayingPage = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState<any[]>([]);
 
@@ -30,6 +33,12 @@ const NowPlayingPage = () => {
       
       {loading && <h5 className="text-lg text-gray-500">Cargando...</h5>}
       {!loading && <MovieList movies={movies} origin="Now-playing" />}
+      <SectionNavigation
+        page={2}
+        totalPages={4}
+        prev="/popular"
+        next="/top-rated"
+      />
     </div>
   );
 };

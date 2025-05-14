@@ -8,9 +8,13 @@ import { getMovieById } from "@/services/movies/getMovieById";
 import { markAsFavorite } from "@/services/accounts/markAsFavorite";
 import { useGuestSession } from "@/providers/GuestSessionContext";
 import { useParams } from "next/navigation";
+import MovieCarousel from "@/components/MovieCarousel/MovieCarousel";
+import { getMovieRecommendations } from "@/services/movies/getMovieRecommendations";
+import { IMovieCarousel } from "@/types/MovieCarousel";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
+  const [recommendations, setRecommendations] = useState<IMovieCarousel[]>([]);
   const [movie, setMovie] = useState<IMovieDetail>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +52,21 @@ const MovieDetailPage = () => {
 
     setIsFavorite(favoriteIds.includes(Number(id)));
   }, [id]);
+
+  useEffect(() => {
+    if (!id || typeof id !== "string") return;
+  
+    const fetchRecommendations = async () => {
+      try {
+        const data = await getMovieRecommendations(id);
+        setRecommendations(data.results);
+      } catch (error) {
+        console.error("Error loading recommendations:", error);
+      }
+    };
+  
+    fetchRecommendations();
+  }, [id]);  
 
   // Marcar o desmarcar como favorito
   const handleToggleFavorite = async () => {
@@ -117,6 +136,13 @@ const MovieDetailPage = () => {
           </button>
         </div>
       </div>
+      {/* Caaarrusel de recomendaciones */}
+      {recommendations.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-4">Recommended Movies</h2>
+          <MovieCarousel movies={recommendations} />
+        </div>
+      )}
     </div>
   );
 };

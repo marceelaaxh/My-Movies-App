@@ -1,4 +1,3 @@
-// src/types/MovieCarousel.ts
 export interface IMovieCarousel {
     id: number;
     title: string;

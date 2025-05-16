@@ -1,26 +1,51 @@
 import Config from "@/config";
 import Image from "next/image";
 import router from "next/router";
+
 interface IMovieCard {
-    title: string;
-    voteAverage: number;
-    posterPath: string;
-    releaseYear: number;
-    description: string;
+  title: string;
+  voteAverage: number;
+  posterPath: string;
+  releaseYear: number;
+  description: string;
+  variant?: "default" | "home";
 }
+
 const MovieCard: React.FC<IMovieCard> = ({
-    title,
-    voteAverage,
-    posterPath,
-    releaseYear,
-    description,
+  title,
+  voteAverage,
+  posterPath,
+  releaseYear,
+  description,
+  variant = "default", 
 }) => {
-    // const router = useRouter();
-    const poster = Config.IMAGE_SOURCE + posterPath;
-    // You can use this to navigate instead of Link in the page.tsx
-    const navigateMovies = (id: number) => {
-        router.push(`/movie/${id}`);
-    };
+  const poster = Config.IMAGE_SOURCE + posterPath;
+
+  const navigateMovies = (id: number) => {
+    router.push(`/movie/${id}`);
+  };
+
+  // Estilo tipo TMDB para el home
+  if (variant === "home") {
+    return (
+      <div className="min-w-[160px] max-w-[170px]">
+        <div className="relative w-full h-auto">
+          <Image
+            src={poster}
+            alt={title}
+            width={300}
+            height={450}
+            className="rounded-xl object-cover shadow-lg"
+          />
+          <div className="absolute -bottom-4 left-2 bg-black text-green-400 border-2 border-green-500 font-bold text-xs w-10 h-10 flex items-center justify-center rounded-full shadow-md">
+            {Math.round(voteAverage)}
+          </div>
+        </div>
+        <h3 className="mt-6 text-sm font-bold leading-tight line-clamp-2">{title}</h3>
+        <p className="text-xs text-gray-400">({releaseYear})</p>
+      </div>
+    );
+  }
     return (
         <div className="flex items-center justify-center">
             <div className="mx-auto bg-white rounded-3xl shadow-xl">

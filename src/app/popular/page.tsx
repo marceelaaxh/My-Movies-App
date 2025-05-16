@@ -34,7 +34,7 @@ const PopularPage = () => {
   }, [currentPage]);
 
   return (
-    <div className="px-6 py-10">
+    <div>
       <h3 className="text-3xl font-bold mb-6">Popular Movies</h3>
 
       {loading && <h5 className="text-lg text-gray-500">Cargando...</h5>}

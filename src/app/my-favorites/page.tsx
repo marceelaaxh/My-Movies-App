@@ -36,7 +36,7 @@ const MyFavoritesPage = () => {
   }, [guestSessionId, page]);
 
   return (
-    <div className="px-6 py-10">
+    <div>
       <h3 className="text-3xl font-bold mb-6">My Favorite Movies</h3>
 
       {loading && (

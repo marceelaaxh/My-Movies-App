@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import MyFavoritesClient from "@/components/MyFavoriteClient/MyFavoriteClient";
+import MyFavoritesClient from "./MyFavoriteClient";
 
 export default function MyFavoritesPage() {
   return (

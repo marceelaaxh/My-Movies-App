@@ -7,7 +7,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import SectionNavigation from "@/components/SectionNavigation/SectionNavigation";
 
 const TopRatedPage = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page") || 1);
 

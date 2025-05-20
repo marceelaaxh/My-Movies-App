@@ -8,8 +8,7 @@ import { getPopularMovies } from "@/services/movies/getPopularMovies";
 import MovieList from "@/components/MovieList/MovieList";
 import SectionNavigation from "@/components/SectionNavigation/SectionNavigation";
 
-const PopularPage = () => {
-  const router = useRouter();
+const PopularPage = () => {  
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page") || 1);
 

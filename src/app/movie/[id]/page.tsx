@@ -41,7 +41,6 @@ const MovieDetailPage = () => {
     fetchMovie();
   }, [id]);
 
-  // Verificar si está en favoritos (localStorage)
   useEffect(() => {
     if (!id || typeof id !== "string") return;
 
